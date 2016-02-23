@@ -1,0 +1,32 @@
+{
+  "name":"poet/framework",
+  "description":"核心开发库",
+  "version":"1.0.0-dev",
+  "type" : "library",
+  "keywords": ["log","cache","queue","util"],
+  "authors":[
+    {
+      "name":"eliot",
+      "email":"820238985@qq.com",
+      "homepage":"",
+      "role":"developer"
+    }
+  ],
+  "require":{
+     "pimple/pimple":"v3.0.2"
+  },
+  "autoload":{
+    "psr-4":{"Poet\\Framework\\":"src"},
+    "files":[
+      "src/Util/helpers.php"
+    ]
+  },
+  "minimum-stability":"dev",
+  "repositories":[
+    {"type":"composer","url":"http://packagist.phpcomposer.com"},
+    {"packagist":false}
+  ]
+
+
+
+}

@@ -1,0 +1,6 @@
+/vendor
+.idea
+.project
+_ide_helper.php
+composer.lock
+.htaccess
