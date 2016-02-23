@@ -1,0 +1,7 @@
+{
+
+  "require":{
+       "jenssegers/agent":"v2.3.1"
+  }
+
+}

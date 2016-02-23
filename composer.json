@@ -12,7 +12,8 @@
     }
   ],
   "require":{
-     "pimple/pimple":"v3.0.2"
+     "pimple/pimple":"v3.0.2",
+     "jenssegers/agent":"v2.3.1"
   },
   "autoload":{
     "psr-4":{"Poet\\Framework\\":"src"},
