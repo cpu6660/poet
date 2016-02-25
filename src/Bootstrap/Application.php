@@ -41,12 +41,14 @@ class Application extends Container {
  * @param $bootstrappers
  */
     public function bootstrapWith($bootstrappers){
-        foreach($bootstrappers as $bootstrapper){
+        foreach($bootstrappers as $key => $bootstrapper){
             //启动
-            $this[$bootstrapper] = function()use($bootstrapper){
-              return new $bootstrapper;
+            list($bootkey,$bootObject) = $bootstrapper ;
+            $this[$bootkey] = function()use($bootObject){
+
+              return new $bootObject;
             };
-            $this[$bootstrapper]->bootstrap($this);
+            $this[$bootkey]->bootstrap($this);
         }
     }
 
@@ -56,7 +58,8 @@ class Application extends Container {
      */
     public function getBootstrappers(){
         return [
-            'Poet\Framework\Bootstrap\LoadConfiguration'
+            ['LogConfiguration','Poet\Framework\Bootstrap\LoadConfiguration'],
+            ['Logger','Poet\Framework\Log\Realization\Logger']
         ];
     }
 

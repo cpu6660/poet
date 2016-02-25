@@ -9,23 +9,14 @@ use Poet\Framework\Util\Contract\Arrayable;
 use Illuminate\Support\Arr;
 use Poet\Framework\Bootstrap\Application;
 
-$arr  = [
+$application = new Application(__DIR__);
+$application->bootstrapWith($application->getBootstrappers());
 
-    'db' => [
-        'mysql'=> [
-            'host' => '127.0.0.1',
-            'user' => 'root',
-            'password' => '123456'
-        ]
-    ],
-    'cache'=> 'redis',
-    'log'  => '/storage'
+$logger = $application['Logger'];
 
-];
+$logger->emergency('hello',['d','e']);
 
-$a  = Arr::add($arr,'ee','value1');
 
-var_dump($arr);
 
 
 
