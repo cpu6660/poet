@@ -1,22 +1,27 @@
 <?php namespace Poet\Framework\Config\Realization;
 use Poet\Framework\Config\Contract\ConfigContract;
-
-class ConfigRealization implements  ConfigContract {
+use ArrayAccess;
+use Poet\Framework\Util\Arr;
+class ConfigRealization implements  ConfigContract,ArrayAccess {
 
     //存储临时设定的键值对
     private $items = [];
-    //设置配置文件的根目录(设置为绝对路径)
-    private static $config_base_dir;
-    //在哪个目录层次下设置的
-    private static $work_dir;
 
+
+    public function __construct($items){
+        $this->items = $items;
+    }
+
+    public function has($key){
+        return Arr::has($this->items,$key);
+    }
 
     /**
      * 获取某个key的值,先获取手动设定的,再读取相应的文件
      * @param $key
      */
-    public static function get($key){
-
+    public  function get($key,$default=null){
+        return Arr::get($this->items,$key,$default);
     }
 
     /**
@@ -24,20 +29,50 @@ class ConfigRealization implements  ConfigContract {
      * @param $key
      * @param $value
      */
-    public static function set($key,$value){
-
-    }
-
-    public static function setConfigDir($configDir){
-        self::$work_dir = getcwd();
-        //如果输入的是相对路径
-        if(true) {
-            self::$config_base_dir = self::$work_dir . "/" . $configDir;
-        } else {
-            self::$config_base_dir = $configDir ;
+    public  function set($key,$value=null){
+        if(is_array($key)){
+            foreach($key as $innerKey=>$innerValue){
+                Arr::set($this->items,$innerKey,$innerValue);
+            }
+        }else {
+            Arr::set($this->items,$key,$value);
         }
-
     }
+
+    public function prepend($key,$value){
+        $array = $this->get($key);
+        array_unshift($array,$value);
+        $this->set($key,$array);
+    }
+
+    public function push($key,$value){
+       $array = $this->get($key);
+       $array[] = $value;
+       $this->set($key,$value);
+    }
+
+
+    public function all(){
+        return $this->items;
+    }
+
+    public function offsetExists($key){
+         return $this->has($key);
+    }
+
+    public function offsetGet($key){
+        return $this->get($key);
+    }
+
+
+    public function offsetSet($key,$value){
+          $this->set($key,$value);
+    }
+
+    public function offsetUnset($key){
+        $this->set($key,null);
+    }
+
 
 
 }

@@ -6,9 +6,6 @@
 use Pimple\Container as PimpleContainer;
 
 class Container extends PimpleContainer {
-    public static function show(){
-        $container = new PimpleContainer();
-        var_dump("this is a test");
-    }
+
 
 }
