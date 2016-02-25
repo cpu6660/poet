@@ -9,17 +9,23 @@ use Poet\Framework\Util\Contract\Arrayable;
 use Illuminate\Support\Arr;
 use Poet\Framework\Bootstrap\Application;
 
+$arr  = [
 
-$app = new Application(__DIR__);
-//加载相应的启动项
-$app->bootstrapWith($app->getBootstrappers());
-//测试配置是否
-//加载了默认配置,还可以根据需要加载其他的配置
-$configuration  =  $app['config'];
-$configuration->set('app',null);
+    'db' => [
+        'mysql'=> [
+            'host' => '127.0.0.1',
+            'user' => 'root',
+            'password' => '123456'
+        ]
+    ],
+    'cache'=> 'redis',
+    'log'  => '/storage'
 
+];
 
-var_dump($configuration->get('app'));
+$a  = Arr::add($arr,'ee','value1');
+
+var_dump($arr);
 
 
 
