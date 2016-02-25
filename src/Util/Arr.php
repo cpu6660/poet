@@ -24,6 +24,15 @@ class Arr {
        return $results;
    }
 
+   public static function get(){
+
+   }
+
+    public static function set(){
+
+    }
+
+
 
 
 

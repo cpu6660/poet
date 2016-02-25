@@ -6,7 +6,7 @@ use ArrayIterator;
 use Poet\Framework\Util\Contract\Arrayable;
 use Poet\Framework\Util\Contract\Jsonable;
 use Poet\Framework\Util\Traits\Macroable;
-
+use Poet\Framework\Util\Arr;
 
 class Collection  implements Countable,Jsonable,Arrayable,ArrayAccess{
     use Macroable;
@@ -91,6 +91,16 @@ class Collection  implements Countable,Jsonable,Arrayable,ArrayAccess{
         return $this->reduce(function($result,$item) use($callback){
            return $result+=$callback($item);
         },0);
+    }
+
+    public function avg($key = null){
+        if($count = $this->count()){
+            return $this->sum($key)/$count;
+        }
+    }
+
+    public function average($key =null){
+        return $this->avg($key);
     }
 
     public function valueRetriever($value){
