@@ -8,13 +8,26 @@ use Poet\Framework\Util\Collection;
 use Poet\Framework\Util\Contract\Arrayable;
 use Illuminate\Support\Arr;
 use Poet\Framework\Bootstrap\Application;
+use Poet\Framework\Util\Program\Pattern\Pipeline;
+use Poet\Framework\Util\Contract\BaseMiddleware;
 
-$application = new Application(__DIR__);
-$application->bootstrapWith($application->getBootstrappers());
+try {
+    $application = new Application(__DIR__);
+    $application->bootstrapWith($application->getBootstrappers());
 
-$logger = $application['Logger'];
+//记录日志
+    $application['Logger']->notice("ddd");
 
-$logger->emergency('hello',['d','e']);
+
+}catch(\Exception $e){
+
+     var_dump($e->getMessage());
+}
+
+
+
+
+
 
 
 

@@ -36,6 +36,10 @@ class Application extends Container {
         return $this->basePath.DIRECTORY_SEPARATOR.'config';
     }
 
+    public function logPath(){
+        return $this->basePath.DIRECTORY_SEPARATOR.'storage/log';
+    }
+
     /**
  * 启动配置的启动加载项
  * @param $bootstrappers
