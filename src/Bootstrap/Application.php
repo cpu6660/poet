@@ -19,13 +19,27 @@ class Application extends Container {
 
     protected $namespace = null;
 
+    protected $logFilename = 'poet';
 
+    private static  $instance ;
     public function __construct($basePath = null){
         if($basePath){
             $this->setBasePath($basePath);
         }
     }
 
+    public static function setInstance(Application $instance){
+       self::$instance  = $instance;
+    }
+
+    public static function getInstance(){
+        return self::$instance;
+    }
+
+
+    public function getLogfileName(){
+        return $this->logFilename;
+    }
 
     public function setBasePath($basePath){
         $this->basePath = rtrim($basePath);
@@ -37,7 +51,11 @@ class Application extends Container {
     }
 
     public function logPath(){
-        return $this->basePath.DIRECTORY_SEPARATOR.'storage/log';
+        return $this->basePath.DIRECTORY_SEPARATOR.'storage/log/';
+    }
+
+    public function logFilename(){
+        return $this->logFilename;
     }
 
     /**

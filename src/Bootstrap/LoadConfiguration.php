@@ -22,9 +22,14 @@ class LoadConfiguration {
     protected function loadConfigurationFiles(Application $app,ConfigRealization $realization){
        //todo 完成filesystem 的编写,再更改这里的代码,先进行简单的实现
        $configPath =   $app->configPath();
-       $filename   =   $configPath."/app.php";
-       if(file_exists($filename) && is_readable($filename)){
-           $realization->set('app', require $filename );
-       }
+       //获取这个目录下的所有的文件,先简单处理
+       $files = glob($configPath."/*.php");
+        foreach($files as $file){
+            $key  = basename($file,'.php');
+            if(file_exists($file) && is_readable($file)){
+                $realization->set($key,require $file);
+            }
+        }
+
     }
 }
